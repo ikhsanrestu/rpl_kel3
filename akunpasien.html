@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dokter OnTime - Akun Pasien</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="flex items-center justify-center h-screen bg-cover bg-center" style="background-image: url('src/Login\ Akun.svg');">
+  <div id="toast" class="fixed z-[99999] -top-20 left-4 bg-white shadow-xl font-bold p-4 rounded-4 flex items-center gap-4 rounded-lg duration-300">
+    <p>Berhasil Membuat Akun</p>
+    <p id="closeToast" class="font-normal underline cursor-pointer hover:text-blue-500">Tutup</p>
+  </div>
+  <div class="bg-gray-100 bg-opacity-80 p-6 rounded-lg shadow-lg max-w-xl w-full h-fit">
+    
+    <div class="flex flex-col items-center mb-1">
+      <div class="w-24 h-24  flex items-center justify-center rounded-full">
+        <img src="src/Vector.svg" alt="Logo" class="w-full h-full">
+      </div>
+    </div>
+
+    <div class="bg-transparent  ml-4 justify-center">
+        <!-- Header -->
+        <div class="flex items-center justify-center mb-6">
+          <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 12c2.28 0 4-1.72 4-4s-1.72-4-4-4-4 1.72-4 4 1.72 4 4 4zm0 2c-2.66 0-8 1.34-8 4v1h16v-1c0-2.66-5.34-4-8-4z"></path>
+          </svg>
+          <h2 class="text-xl font-semibold text-gray-800">Pasien</h2>
+        </div>
+    
+        <!-- Form Fields -->
+        <form class="space-y-3">
+          <!-- Nama Field -->
+          <div class="flex items-center">
+            <label class="w-1/3 text-gray-700 font-medium">Nama</label>
+            <span class="mr-2">:</span>
+            <input id="nama"  type="text" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Masukkan Nama">
+          </div>
+    
+          <!-- Email Field -->
+          <div class="flex items-center">
+            <label class="w-1/3 text-gray-700 font-medium">Email</label>
+            <span class="mr-2">:</span>
+            <input id="email" type="email" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Masukkan Email">
+          </div>
+    
+          <!-- Kata Sandi Field -->
+          <div class="flex items-center">
+            <label class="w-1/3 text-gray-700 font-medium">Kata Sandi</label>
+            <span class="mr-2">:</span>
+            <input id="kata_sandi" type="password" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Masukkan Kata Sandi">
+          </div>
+    
+          <!-- Kabupaten/Kota Field -->
+          <div class="flex items-center">
+            <label class="w-1/3 text-gray-700 font-medium">Kabupaten/Kota</label>
+            <span class="mr-2">:</span>
+            <input id="kabupaten_kota" type="text" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Masukkan Kabupaten/Kota">
+          </div>
+    
+          <!-- Kecamatan Field -->
+          <div class="flex items-center">
+            <label class="w-1/3 text-gray-700 font-medium">Kecamatan</label>
+            <span class="mr-2">:</span>
+            <input id="kecamatan" type="text" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Masukkan Kecamatan">
+          </div>
+
+        <!-- Alamat Detail-->
+        <div class="flex items-center">
+          <label class="w-1/3 text-gray-700 font-medium">Alamat</label>
+          <span class="mr-2">:</span>
+          <input id="alamat_detail" type="text" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Masukkan Alamat">
+        </div>
+          <button type="submit" id="regispasienbtn"
+              class="w-full bg-red-600 hover:bg-red-700 text-white font-semibold py-2 rounded-lg focus:outline-none">
+         Daftar
+         </button>
+    
+
+        <div class="mt-4 text-center">
+         <a href="tipeakun.html" class="text-gray-500 text-sm">Kembali</a>
+        </form>
+
+        
+      
+
+      
+    </div>
+  </div>
+
+  <script>
+    const buttomSubmit = document.getElementById("regispasienbtn");
+    const closeToast = document.getElementById("closeToast");
+
+    closeToast.addEventListener("click", () => {
+        const toast = document.getElementById("toast");
+        toast.classList.remove("top-4");
+        toast.classList.add("-top-20");
+    });
+
+    buttomSubmit.addEventListener("click", async (e) => {
+        e.preventDefault();
+        const toast = document.getElementById("toast");
+        buttomSubmit.innerHTML = "Loading...";
+        
+        const nama = document.getElementById("nama");
+        const email = document.getElementById("email");
+        const kata_sandi = document.getElementById("kata_sandi");
+        const kabupaten_kota = document.getElementById("kabupaten_kota");
+        const kecamatan = document.getElementById("kecamatan");
+        const alamat_detail = document.getElementById("alamat_detail");
+        const role = "Pasien";
+
+        const sendData = {
+            nama: nama.value,
+            email: email.value,
+            kata_sandi: kata_sandi.value,
+            kabupaten_kota: kabupaten_kota.value,
+            kecamatan: kecamatan.value,
+            alamat_detail: alamat_detail.value,
+            role: role
+        };
+
+        try {
+            const res = await fetch("http://localhost:4000/pasien", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(sendData)
+            });
+
+            const data = await res.json();
+            buttomSubmit.innerHTML = "Daftar";
+
+            if (res.ok) { // Jika respons server menunjukkan berhasil
+                console.log("Respon", data);
+                toast.classList.remove("-top-20");
+                toast.classList.add("top-4");
+
+                // Tunggu beberapa detik untuk menampilkan pesan sukses, kemudian arahkan ke login
+                setTimeout(() => {
+                    window.location.href = "login.html"; // Ganti "login.html" dengan path halaman login Anda
+                }, 2000); // 2000 ms = 2 detik
+            } else {
+                console.error("Gagal mendaftarkan akun:", data.message);
+                alert("Pendaftaran gagal: " + (data.message || "Terjadi kesalahan"));
+            }
+        } catch (error) {
+            console.error("Terjadi kesalahan:", error);
+            alert("Terjadi kesalahan saat mencoba mendaftarkan akun");
+        }
+    });
+</script>
+</body>
+</html>

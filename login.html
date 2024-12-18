@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dokter OnTime - Login</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+
+<body class="flex items-center justify-center h-screen bg-cover bg-center"
+  style="background-image: url('src/Login\ Akun.svg');">
+  <div class="bg-gray-100 bg-opacity-80 p-6 rounded-lg shadow-lg max-w-xl w-full h-fit">
+
+    <div class="flex flex-col items-center mb-6">
+      <div class="w-24 h-24  flex items-center justify-center rounded-full">
+        <img src="src/Vector.svg" alt="Logo" class="w-full h-full">
+      </div>
+    </div>
+
+    <h2 class="text-center text-black font-semibold">MASUK</h2>
+
+    <form action="#" method="post">
+      <div class="mb-4">
+        <label for="email" class="block text-gray-700 text-sm font-semibold">Email</label>
+        <input type="email" id="email" name="email" required
+          class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent">
+      </div>
+
+      <div class="mb-6">
+        <label for="password" class="block text-gray-700 text-sm font-semibold">Kata Sandi</label>
+        <input type="password" id="password" name="password" required
+          class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent">
+      </div>
+
+      <button id="login-submit" type="submit"
+        class="w-full bg-red-600 hover:bg-red-700 text-white font-semibold py-2 rounded-lg focus:outline-none">
+        MASUK
+      </button>
+    </form>
+
+    <div class="mt-4 text-center">
+      <a href="index.html" class="text-gray-500 text-sm">Kembali</a>
+    </div>
+  </div>
+  <script>
+    const buttomSubmit = document.getElementById("login-submit");
+
+    buttomSubmit.addEventListener("click", async (e) => {
+      e.preventDefault(); // Mencegah reload halaman saat tombol ditekan
+
+      const email = document.getElementById("email").value;
+      const kata_sandi = document.getElementById("password").value;
+
+      // Validasi input kosong
+      if (!email || !kata_sandi) {
+        alert("Email dan kata sandi wajib diisi!");
+        return;
+      }
+
+      const sendData = {
+        email: email,
+        kata_sandi: kata_sandi,
+      };
+
+      try {
+        const res = await fetch("http://localhost:4000/login", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(sendData),
+        });
+
+        const resData = await res.json();
+        console.log("response: ", resData);
+
+        if (res.ok) {
+          const role = resData.data.role;
+          const userId = resData.data.id; // Ambil ID user dari respons
+          const nama = resData.data.nama; 
+
+          // Simpan ID user di localStorage
+          localStorage.setItem("user-id", userId);
+          localStorage.setItem("nama", nama);
+
+          // Simpan data pengguna lainnya jika diperlukan
+          localStorage.setItem("data-user", JSON.stringify(resData.data));
+
+          // Redirect berdasarkan role
+          if (role.toLowerCase() === "pasien") {
+            window.location.href = "pasien/berandapasien.html";
+          } else if (role.toLowerCase() === "klinik") {
+            window.location.href = "klinik/berandaklinik.html";
+          } else if (role.toLowerCase() === "dokter") {
+            window.location.href = "dokter/berandadokter.html";
+          } else {
+            alert("Peran tidak dikenali.");
+          }
+        }
+        else {
+          // Tampilkan pesan error dari backend
+          alert(resData.data.message);
+        }
+      } catch (error) {
+        console.error("Error:", error);
+        alert("Terjadi kesalahan jaringan atau server.");
+      }
+    });
+  </script>
+
+</body>
+
+</html>
