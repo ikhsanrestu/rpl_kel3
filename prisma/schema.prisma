@@ -1,0 +1,89 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model dokter {
+  id_dokter                        Int      @id @default(autoincrement())
+  nama_dokter                      String
+  id_user                          Int
+  biodata                          String
+  pendidikan                       String
+  pengalaman                       String
+  spesialis                        String
+  kontak                           String
+  id_user_klinik                   Int?
+  user                             user     @relation(fields: [id_user], references: [id], map: "Dokter_id_user_fkey")
+  user_dokter_id_user_klinikTouser user?    @relation("dokter_id_user_klinikTouser", fields: [id_user_klinik], references: [id], onDelete: Restrict, onUpdate: Restrict, map: "fk_klinik_user")
+  jadwal                           jadwal[]
+
+  @@index([id_user], map: "Dokter_id_user_fkey")
+  @@index([id_user_klinik], map: "fk_klinik_user")
+}
+
+model jadwal {
+  id_jadwal Int         @id @default(autoincrement())
+  id_dokter Int
+  hari      String
+  jam       String
+  dokter    dokter      @relation(fields: [id_dokter], references: [id_dokter], map: "Jadwal_id_dokter_fkey")
+  reservasi reservasi[]
+
+  @@index([id_dokter], map: "Jadwal_id_dokter_fkey")
+}
+
+model notifikasi {
+  id_notifikasi      Int         @id @default(autoincrement())
+  pesan              String
+  tanggal_notifikasi DateTime
+  reservasi          reservasi[]
+}
+
+model reservasi {
+  id_reservasi  Int        @id @default(autoincrement())
+  id_user       Int
+  id_jadwal     Int
+  id_notifikasi Int
+  id_ulasan     Int
+  status        String?    @db.VarChar(10)
+  jadwal        jadwal     @relation(fields: [id_jadwal], references: [id_jadwal], map: "Reservasi_id_jadwal_fkey")
+  notifikasi    notifikasi @relation(fields: [id_notifikasi], references: [id_notifikasi], map: "Reservasi_id_notifikasi_fkey")
+  ulasan        ulasan     @relation(fields: [id_ulasan], references: [id_ulasan], map: "Reservasi_id_ulasan_fkey")
+  user          user       @relation(fields: [id_user], references: [id], map: "Reservasi_id_user_fkey")
+
+  @@index([id_jadwal], map: "Reservasi_id_jadwal_fkey")
+  @@index([id_notifikasi], map: "Reservasi_id_notifikasi_fkey")
+  @@index([id_ulasan], map: "Reservasi_id_ulasan_fkey")
+  @@index([id_user], map: "Reservasi_id_user_fkey")
+}
+
+model ulasan {
+  id_ulasan Int         @id @default(autoincrement())
+  rating    Float
+  komentar  String
+  reservasi reservasi[]
+}
+
+model user {
+  id                                 Int         @id @default(autoincrement())
+  nama                               String
+  email                              String      @unique(map: "User_email_key")
+  kata_sandi                         String
+  kabupaten_kota                     String
+  kecamatan                          String
+  alamat_detail                      String?
+  role                               user_role
+  dokter                             dokter[]
+  dokter_dokter_id_user_klinikTouser dokter[]    @relation("dokter_id_user_klinikTouser")
+  reservasi                          reservasi[]
+}
+
+enum user_role {
+  Pasien
+  Klinik
+  Dokter
+}
