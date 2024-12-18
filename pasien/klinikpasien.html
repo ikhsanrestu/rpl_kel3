@@ -1,0 +1,333 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Klinik Pasien</title>
+</head>
+
+<body>
+
+    <nav
+        class="flex items-center justify-between flex-wrap bg-white py-4 lg:px-12 shadow border-solid border-t-2 border-red-700">
+        <div
+            class="flex justify-between lg:w-auto w-full lg:border-b-0 pl-36 pr-2 border-solid border-b-2 border-gray-300 pb-5 lg:pb-0">
+            <div class="flex items-center flex-shrink-0 text-gray-800 mr-16">
+                <a href="index.html" class="flex items-center space-x-3 rtl:space-x-reverse">
+                    <img src="../src/Vector.svg" class="h-full w-full" alt="Logo" />
+                </a>
+            </div>
+            <div class="block lg:hidden ">
+                <button id="nav"
+                    class="flex items-center px-3 py-2 border-2 rounded text-red-700 border-red-700 hover:text-red-700 hover:border-red-700">
+                    <svg class="fill-current h-3 w-3" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                        <title>Menu</title>
+                        <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <div class="menu w-full  flex-grow lg:flex lg:items-center lg:w-auto lg:px-3 px-8">
+            <div class="text-lg space-x-11 font-bold text-red-700 lg:flex-grow">
+                <a href="berandapasien.html"
+                    class="block mt-4 lg:inline-block lg:mt-0 hover:text-white px-4 py-2 rounded hover:bg-red-700 mr-2">
+                    Beranda
+                </a>
+                <a href="klinikpasien.html"
+                    class=" block mt-4 lg:inline-block lg:mt-0 hover:text-white px-4 py-2 rounded hover:bg-red-700 mr-2">
+                    Klinik
+                </a>
+                <a href="reservasi.html"
+                    class="block mt-4 lg:inline-block lg:mt-0 hover:text-white px-4 py-2 rounded hover:bg-red-700 mr-2">
+                    Dokter
+                </a>
+            </div>
+            <!-- This is an example component -->
+            <!-- <div class="relative mx-auto text-gray-600 lg:block hidden">
+				<input
+					class="border-2 border-gray-300 bg-white h-10 pl-2 pr-8 rounded-lg text-sm focus:outline-none"
+					type="search" name="search" placeholder="Search">
+				<button type="submit" class="absolute right-0 top-0 mt-3 mr-2">
+					<svg class="text-gray-600 h-4 w-4 fill-current" xmlns="http://www.w3.org/2000/svg"
+						 version="1.1" id="Capa_1" x="0px" y="0px"
+						 viewBox="0 0 56.966 56.966" style="enable-background:new 0 0 56.966 56.966;"
+						 xml:space="preserve"
+						 width="512px" height="512px">
+				<path
+					d="M55.146,51.887L41.588,37.786c3.486-4.144,5.396-9.358,5.396-14.786c0-12.682-10.318-23-23-23s-23,10.318-23,23  s10.318,23,23,23c4.761,0,9.298-1.436,13.177-4.162l13.661,14.208c0.571,0.593,1.339,0.92,2.162,0.92  c0.779,0,1.518-0.297,2.079-0.837C56.255,54.982,56.293,53.08,55.146,51.887z M23.984,6c9.374,0,17,7.626,17,17s-7.626,17-17,17  s-17-7.626-17-17S14.61,6,23.984,6z"/>
+			  </svg>
+				</button>
+			</div> -->
+            <div class="flex ">
+                <div class="relative font-[sans-serif] w-max mx-auto">
+                    <button type="button" id="dropdownToggle"
+                        class="px-4 py-2 flex items-center rounded-full text-[#333] text-sm border border-gray-300 outline-none hover:bg-gray-100">
+                        <img src="../src/User.svg" class="w-7 h-7 mr-3 rounded-full shrink-0"></img>
+                        <h1 id="user"></h1>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-3 fill-gray-400 inline ml-3"
+                            viewBox="0 0 24 24">
+                            <path fill-rule="evenodd"
+                                d="M11.99997 18.1669a2.38 2.38 0 0 1-1.68266-.69733l-9.52-9.52a2.38 2.38 0 1 1 3.36532-3.36532l7.83734 7.83734 7.83734-7.83734a2.38 2.38 0 1 1 3.36532 3.36532l-9.52 9.52a2.38 2.38 0 0 1-1.68266.69734z"
+                                clip-rule="evenodd" data-original="#000000" />
+                        </svg>
+                    </button>
+
+                    <ul id="dropdownMenu"
+                        class='absolute block shadow-lg bg-white py-2 z-[1000] min-w-full w-max rounded-lg max-h-96 overflow-auto'>
+
+                        <li class='py-2.5 px-5 flex items-center hover:bg-gray-100 text-[#333] text-sm cursor-pointer'>
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="w-4 h-4 mr-3"
+                                viewBox="0 0 6.35 6.35">
+                                <path
+                                    d="M3.172.53a.265.266 0 0 0-.262.268v2.127a.265.266 0 0 0 .53 0V.798A.265.266 0 0 0 3.172.53zm1.544.532a.265.266 0 0 0-.026 0 .265.266 0 0 0-.147.47c.459.391.749.973.749 1.626 0 1.18-.944 2.131-2.116 2.131A2.12 2.12 0 0 1 1.06 3.16c0-.65.286-1.228.74-1.62a.265.266 0 1 0-.344-.404A2.667 2.667 0 0 0 .53 3.158a2.66 2.66 0 0 0 2.647 2.663 2.657 2.657 0 0 0 2.645-2.663c0-.812-.363-1.542-.936-2.03a.265.266 0 0 0-.17-.066z"
+                                    data-original="#000000"></path>
+                            </svg>
+                            <a id="logout" href="../login.html">Logout</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+
+    <h1 class="text-2xl font-bold ml-40 mt-10">Daftar Klinik</h1>
+    <div class="container mx-auto p-4">
+
+        <div id="list-box"
+            class="grid grid-cols-3 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-24 justify-items-center">
+            <!-- Card 1 -->
+
+        </div>
+    </div>
+
+    </div>
+    </div>
+
+
+
+
+
+
+    <footer class="bg-red-300 ">
+        <div class="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8">
+            <div class="md:flex md:justify-between">
+                <div class="mb-6 md:mb-0">
+                    <a href="index.html" class="flex items-center">
+                        <img src="../src/Vector.svg" class="h-14 me-3" alt="Logo" />
+                    </a>
+                </div>
+                <div class="grid grid-cols-2 gap-8 sm:gap-6 sm:grid-cols-2">
+
+                    <div class="">
+                        <h2 class="mb-6 text-sm font-semibold text-black uppercase">Tentang</h2>
+                        <ul class="text-black font-medium">
+                            <li class="mb-3">
+                                <a href="" class="hover:underline">Tentang Kami</a>
+                            </li>
+                            <li class="mb-3">
+                                <a href="" class="hover:underline">Blog</a>
+                            </li>
+                            <li class="mb-3">
+                                <a href="" class="hover:underline">Karir</a>
+                            </li>
+                            <li class="mb-3">
+                                <a href="" class="hover:underline">Syarat dan Ketentuan</a>
+                            </li>
+                            <li class="mb-3">
+                                <a href="" class="hover:underline">Kebijakan Privasi</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="pl-20">
+                        <h2 class="mb-6 text-sm font-semibold text-black uppercase">Kontak</h2>
+                        <ul class="text-black font-medium">
+                            <li class="mb-3">
+                                <img src="../src/whatsapp.svg" alt="WhatsApp Logo" class="inline-block w-5 h-5 mr-2">
+                                <a href="" class="hover:underline">Admin 1</a>
+                            </li>
+                            <li class="mb-3">
+                                <img src="../src/whatsapp.svg" alt="WhatsApp Logo" class="inline-block w-5 h-5 mr-2">
+                                <a href="" class="hover:underline">Admin 2</a>
+                            </li>
+                            <li class="mb-3">
+                                <img src="../src/Email.svg" alt="WhatsApp Logo" class="inline-block w-5 h-5 mr-2">
+                                <a href="" class="hover:underline">Email</a>
+                            </li>
+                            <li class="mb-3">
+                                <img src="../src/Call.svg" alt="WhatsApp Logo" class="inline-block w-5 h-5 mr-2">
+                                <a href="" class="hover:underline">Call Center</a>
+                            </li>
+
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+            <hr class="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8" />
+            <div class="sm:flex sm:items-center sm:justify-between">
+                <span class="text-sm text-black sm:text-center">© 2024 <a href="index.html"
+                        class="hover:underline">DoctorOnTime™</a>. All Rights Reserved.
+                </span>
+                <div class="flex mt-4 sm:justify-center sm:mt-0">
+                    <a href="#" class="text-gray-500 hover:text-gray-900 dark:hover:text-white">
+                        <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
+                            viewBox="0 0 8 19">
+                            <path fill-rule="evenodd"
+                                d="M6.135 3H8V0H6.135a4.147 4.147 0 0 0-4.142 4.142V6H0v3h2v9.938h3V9h2.021l.592-3H5V3.591A.6.6 0 0 1 5.592 3h.543Z"
+                                clip-rule="evenodd" />
+                        </svg>
+                        <span class="sr-only">Facebook page</span>
+                    </a>
+                    <a href="#" class="text-gray-500 hover:text-gray-900 dark:hover:text-white ms-5">
+                        <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
+                            viewBox="0 0 21 16">
+                            <path
+                                d="M16.942 1.556a16.3 16.3 0 0 0-4.126-1.3 12.04 12.04 0 0 0-.529 1.1 15.175 15.175 0 0 0-4.573 0 11.585 11.585 0 0 0-.535-1.1 16.274 16.274 0 0 0-4.129 1.3A17.392 17.392 0 0 0 .182 13.218a15.785 15.785 0 0 0 4.963 2.521c.41-.564.773-1.16 1.084-1.785a10.63 10.63 0 0 1-1.706-.83c.143-.106.283-.217.418-.33a11.664 11.664 0 0 0 10.118 0c.137.113.277.224.418.33-.544.328-1.116.606-1.71.832a12.52 12.52 0 0 0 1.084 1.785 16.46 16.46 0 0 0 5.064-2.595 17.286 17.286 0 0 0-2.973-11.59ZM6.678 10.813a1.941 1.941 0 0 1-1.8-2.045 1.93 1.93 0 0 1 1.8-2.047 1.919 1.919 0 0 1 1.8 2.047 1.93 1.93 0 0 1-1.8 2.045Zm6.644 0a1.94 1.94 0 0 1-1.8-2.045 1.93 1.93 0 0 1 1.8-2.047 1.918 1.918 0 0 1 1.8 2.047 1.93 1.93 0 0 1-1.8 2.045Z" />
+                        </svg>
+                        <span class="sr-only">Discord community</span>
+                    </a>
+                    <a href="#" class="text-gray-500 hover:text-gray-900 dark:hover:text-white ms-5">
+                        <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
+                            viewBox="0 0 20 17">
+                            <path fill-rule="evenodd"
+                                d="M20 1.892a8.178 8.178 0 0 1-2.355.635 4.074 4.074 0 0 0 1.8-2.235 8.344 8.344 0 0 1-2.605.98A4.13 4.13 0 0 0 13.85 0a4.068 4.068 0 0 0-4.1 4.038 4 4 0 0 0 .105.919A11.705 11.705 0 0 1 1.4.734a4.006 4.006 0 0 0 1.268 5.392 4.165 4.165 0 0 1-1.859-.5v.05A4.057 4.057 0 0 0 4.1 9.635a4.19 4.19 0 0 1-1.856.07 4.108 4.108 0 0 0 3.831 2.807A8.36 8.36 0 0 1 0 14.184 11.732 11.732 0 0 0 6.291 16 11.502 11.502 0 0 0 17.964 4.5c0-.177 0-.35-.012-.523A8.143 8.143 0 0 0 20 1.892Z"
+                                clip-rule="evenodd" />
+                        </svg>
+                        <span class="sr-only">Twitter page</span>
+                    </a>
+                    <a href="#" class="text-gray-500 hover:text-gray-900 dark:hover:text-white ms-5">
+                        <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
+                            viewBox="0 0 20 20">
+                            <path fill-rule="evenodd"
+                                d="M10 .333A9.911 9.911 0 0 0 6.866 19.65c.5.092.678-.215.678-.477 0-.237-.01-1.017-.014-1.845-2.757.6-3.338-1.169-3.338-1.169a2.627 2.627 0 0 0-1.1-1.451c-.9-.615.07-.6.07-.6a2.084 2.084 0 0 1 1.518 1.021 2.11 2.11 0 0 0 2.884.823c.044-.503.268-.973.63-1.325-2.2-.25-4.516-1.1-4.516-4.9A3.832 3.832 0 0 1 4.7 7.068a3.56 3.56 0 0 1 .095-2.623s.832-.266 2.726 1.016a9.409 9.409 0 0 1 4.962 0c1.89-1.282 2.717-1.016 2.717-1.016.366.83.402 1.768.1 2.623a3.827 3.827 0 0 1 1.02 2.659c0 3.807-2.319 4.644-4.525 4.889a2.366 2.366 0 0 1 .673 1.834c0 1.326-.012 2.394-.012 2.72 0 .263.18.572.681.475A9.911 9.911 0 0 0 10 .333Z"
+                                clip-rule="evenodd" />
+                        </svg>
+                        <span class="sr-only">GitHub account</span>
+                    </a>
+
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script>
+
+        // Ambil data "nama" dari localStorage
+        const nama = localStorage.getItem("nama");
+        const id = localStorage.getItem("user-id");
+        // Dapatkan semua elemen dengan ID "user" (gunakan querySelectorAll)
+        const users = document.querySelectorAll("#user");
+
+        // Iterasi setiap elemen untuk merender nama
+        users.forEach(user => {
+            if (nama) {
+                user.innerHTML = `${nama}`;
+            } else {
+                user.innerHTML = "Nama tidak ditemukan di localStorage.";
+            }
+        });
+        let dropdownToggle = document.getElementById('dropdownToggle');
+        let dropdownMenu = document.getElementById('dropdownMenu');
+
+        function handleClick() {
+            if (dropdownMenu.className.includes('block')) {
+                dropdownMenu.classList.add('hidden')
+                dropdownMenu.classList.remove('block')
+            } else {
+                dropdownMenu.classList.add('block')
+                dropdownMenu.classList.remove('hidden')
+            }
+        }
+        const logoutButton = document.getElementById("logout");
+
+		logoutButton.addEventListener("click", () => {
+			localStorage.removeItem("user-id");
+			localStorage.removeItem("data-user");
+			window.location.href = "../login.html"; // Redirect ke halaman login
+		});
+
+        dropdownToggle.addEventListener('click', handleClick);
+
+        // Ambil elemen dengan id "list-box"
+        const listBox = document.getElementById("list-box");
+
+        // Fungsi untuk membuat card klinik
+        function createKlinikCard(klinik) {
+            return `
+    <div class="relative flex flex-col my-6 bg-white shadow-sm border border-slate-200 rounded-lg w-96">
+        <div class="relative p-2.5 h-96 overflow-hidden rounded-xl bg-clip-border">
+            <img
+                src="../src/klinik1.jpg"
+                class="h-full w-full object-cover rounded-md"
+            />
+        </div>
+        <div class="p-4">
+            <div class="mb-2">
+                <p class="text-slate-800 text-xl font-semibold">${klinik.nama}</p>
+            </div>
+            <p class="text-slate-600 leading-normal font-light">
+                <strong>Kontak:</strong> ${klinik.email || "Tidak tersedia"} <br />
+                <strong>Alamat:</strong> ${klinik.alamat_detail}, ${klinik.kecamatan}, ${klinik.kabupaten_kota}
+            </p>
+            <button
+                class="rounded-md w-full mt-6 bg-red-500 py-2 px-4 border border-transparent text-center text-sm text-white transition-all shadow-md hover:shadow-lg focus:bg-red-300 focus:shadow-none active:bg-red-300 hover:bg-red-300 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+                type="button"
+                onclick="handleReservasi(${klinik.id})"
+            >
+                Reservasi
+            </button>
+        </div>
+    </div>
+  `;
+        }
+
+        // Fungsi untuk memuat data klinik dari API
+        async function loadKlinikData() {
+            try {
+                // Panggil API untuk mendapatkan data klinik
+                const response = await fetch("http://localhost:4000/klinik"); // Ganti URL sesuai konfigurasi backend Anda
+
+                if (!response.ok) {
+                    throw new Error("Gagal mengambil data klinik");
+                }
+
+                const data = await response.json();
+
+                if (data.status !== 200 || !data.data) {
+                    throw new Error(data.message || "Data klinik tidak ditemukan");
+                }
+                console.log(data)
+                // Hapus konten lama
+                listBox.innerHTML = "";
+
+                // Iterasi data dan tambahkan card ke dalam list-box
+                data.data.forEach((klinik) => {
+                    listBox.innerHTML += createKlinikCard(klinik);
+                });
+            } catch (error) {
+                console.error("Error loading klinik data:", error);
+                listBox.innerHTML = `<p class='text-red-500'>Gagal memuat data klinik: ${error.message}</p>`;
+            }
+        }
+
+        // Fungsi untuk menangani klik tombol Reservasi
+        function handleReservasi(id) {
+            // Simpan id ke localStorage
+            localStorage.setItem("id", id);
+
+            // Alihkan ke halaman daftardokter.html
+            window.location.href = "daftardokter.html"; // Ganti URL sesuai kebutuhan
+        }
+
+        // Panggil fungsi untuk memuat data klinik
+        loadKlinikData();
+
+    </script>
+
+
+</body>
+
+</html>
